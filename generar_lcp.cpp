@@ -109,40 +109,12 @@ void generar_parcialmente_ordenado(const std::string& nombre, int cantidad, doub
     archivo.close();
 }
 
-// Función para generar mezcla de aleatorios y ascendentes
-void generar_mixto(const std::string& nombre, int cantidad, double porcentaje) {
-    int cantidad_aleatorio = static_cast<int>(cantidad * porcentaje);
-    int cantidad_ascendente = cantidad - cantidad_aleatorio;
-    std::vector<int32_t> arr(cantidad);
-
-    std::random_device rd;
-    std::mt19937 rng(rd());
-    std::uniform_int_distribution<int32_t> dist(-cantidad, cantidad);
-
-    for (int i = 0; i < cantidad_aleatorio; ++i) {
-        arr[i] = dist(rng);
-    }
-
-    int32_t valor = 1;
-    for (int i = cantidad_aleatorio; i < cantidad; ++i) {
-        arr[i] = valor++;
-    }
-
-    std::ofstream archivo(nombre, std::ios::binary);
-    if (!archivo) {
-        std::cerr << "No se pudo crear el archivo." << std::endl;
-        return;
-    }
-
-    archivo.write(reinterpret_cast<char*>(arr.data()), cantidad * sizeof(int32_t));
-    archivo.close();
-}
 
 
 int main(int argc, char* argv[]) {
     if (argc < 4) {
         std::cerr << "Uso: " << argv[0] << " tipo nombre_archivo cantidad [porcentaje]\n";
-        std::cerr << "Tipos: asc | desc | desordenado | parcial | mixto\n";
+        std::cerr << "Tipos: asc | desc | desordenado | parcial \n";
         return 1;
     }
 
@@ -160,9 +132,6 @@ int main(int argc, char* argv[]) {
     } else if (tipo == "parcial") {
         if (porcentaje <= 0.0 || porcentaje > 1.0) porcentaje = 0.01;
         generar_parcialmente_ordenado(nombre, cantidad, porcentaje);
-    } else if (tipo == "mixto") {
-        if (porcentaje <= 0.0 || porcentaje > 1.0) porcentaje = 0.5;
-        generar_mixto(nombre, cantidad, porcentaje);
     } else {
         std::cerr << "Tipo desconocido: " << tipo << "\n";
         return 1;
