@@ -37,7 +37,7 @@ void mergeTim(std::vector<int32_t>& arr, int l, int m, int r) {
         arr[k++] = right[j++];
 }
 
-// Implementación principal de TimSort
+
 void timSort(std::vector<int32_t>& arr) {
     int n = arr.size();
     // Ordena segmentos pequeños con insertion sort

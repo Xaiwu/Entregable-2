@@ -1,5 +1,3 @@
-#include <iostream>
-#include <vector>
 #include "lectura.h" 
 
 // int main() {
@@ -13,14 +11,14 @@
 
 
 int main() {
-    std::vector<int32_t> arr = leer_arreglo("100MB.lcp");
+    std::vector<int32_t> arr = leer_arreglo("1MB.lcp");
     int en_orden = 0;
     int total = arr.size() - 1;
 
     for (int i = 0; i < total; ++i) {
-        if (arr[i] >= arr[i + 1]) en_orden++;
+        if (arr[i] <= arr[i + 1]) en_orden++;
     }
-    for (int i = 0; i < 30 && i < arr.size(); ++i)
+    for (int i = 0; i < 500 && i < arr.size(); ++i)
         std::cout << arr[i] << " ";
 
     double porcentaje = 100.0 * en_orden / total;

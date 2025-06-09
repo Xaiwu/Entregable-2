@@ -1,9 +1,7 @@
 #include "quickSort.h"
-#include <stack>
-#include <vector>
-#include <algorithm>
 
-
+// Realiza la partición del arreglo usando un pivote, colocando los menores a la izquierda y 
+// los mayores a la derecha
 int partition(std::vector<int32_t>& arr, int low, int high) {
     int32_t pivot = arr[high];
     int i = low - 1;
@@ -16,7 +14,7 @@ int partition(std::vector<int32_t>& arr, int low, int high) {
     std::swap(arr[i + 1], arr[high]);
     return i + 1;
 }
-
+// Ordena el vector usando QuickSort de manera iterativa, usa una pila para simular las llamadas recursivas.
 void quickSort(std::vector<int32_t>& arr) {
     if (arr.empty()) return;
 
